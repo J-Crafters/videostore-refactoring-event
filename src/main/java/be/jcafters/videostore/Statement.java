@@ -60,37 +60,49 @@ public class Statement {
 
 	private String rentalLine(Rental rental) {
 		StringBuilder rentalLines = new StringBuilder();
-		double thisAmount = 0;
 
-		// determines the amount for each line
-		switch (rental.getMovie().getPriceCode()) {
-		case Movie.REGULAR -> {
-			thisAmount += 2;
-			if (rental.getDaysRented() > 2) {
-				thisAmount += (rental.getDaysRented() - 2) * 1.5;
-			}
-		}
-		case Movie.NEW_RELEASE -> thisAmount += rental.getDaysRented() * 3;
-		case Movie.CHILDRENS -> {
-			thisAmount += 1.5;
-			if (rental.getDaysRented() > 3) {
-				thisAmount += (rental.getDaysRented() - 3) * 1.5;
-			}
-		}
-		default -> throw new IllegalArgumentException();
-		}
+		double rentalAmount = determineAmount(rental);
 
+		frequentRenterPoints += determineFrequentRenterPoints(rental);
+
+		rentalLines.append("\t").append(rental.getMovie().getTitle()).append("\t").append(rentalAmount).append("\n");
+
+		totalAmount += rentalAmount;
+
+		return rentalLines.toString();
+	}
+
+	private int determineFrequentRenterPoints(Rental rental) {
+		int frequentRenterPoints = 0;
 		frequentRenterPoints++;
 
 		if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE && rental.getDaysRented() > 1) {
 			frequentRenterPoints++;
 		}
 
-		rentalLines.append("\t").append(rental.getMovie().getTitle()).append("\t").append(thisAmount).append("\n");
+		return frequentRenterPoints;
+	}
 
-		totalAmount += thisAmount;
+	private double determineAmount(Rental rental) {
+		double rentalAmount = 0;
 
-		return rentalLines.toString();
+		switch (rental.getMovie().getPriceCode()) {
+		case Movie.REGULAR -> {
+			rentalAmount += 2;
+			if (rental.getDaysRented() > 2) {
+				rentalAmount += (rental.getDaysRented() - 2) * 1.5;
+			}
+		}
+		case Movie.NEW_RELEASE -> rentalAmount += rental.getDaysRented() * 3;
+		case Movie.CHILDRENS -> {
+			rentalAmount += 1.5;
+			if (rental.getDaysRented() > 3) {
+				rentalAmount += (rental.getDaysRented() - 3) * 1.5;
+			}
+		}
+		default -> throw new IllegalArgumentException();
+		}
+		return rentalAmount;
 	}
 
 	private String footer() {
