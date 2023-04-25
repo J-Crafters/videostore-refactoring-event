@@ -1,23 +1,23 @@
 package be.jcrafters.videostore;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import be.jcafters.videostore.Customer;
 import be.jcafters.videostore.Movie;
 import be.jcafters.videostore.Rental;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class VideoStoreTest {
+class VideoStoreTest {
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		customer = new Customer("Fred");
 	}
 
 	@Test
-	public void testSingleNewReleaseStatement() {
+	void testSingleNewReleaseStatement() {
 		customer.addRental(new Rental(new Movie("The Cell", Movie.NEW_RELEASE), 3));
 		assertEquals("Rental Record for Fred\n" +
 					 "\tThe Cell\t9.0\n" +
@@ -27,7 +27,7 @@ public class VideoStoreTest {
 	}
 
 	@Test
-	public void testDualNewReleaseStatement() {
+	void testDualNewReleaseStatement() {
 		customer.addRental(new Rental(new Movie("The Cell", Movie.NEW_RELEASE), 3));
 		customer.addRental(new Rental(new Movie("The Tigger Movie", Movie.NEW_RELEASE), 3));
 		assertEquals("Rental Record for Fred\n" +
@@ -39,7 +39,7 @@ public class VideoStoreTest {
 	}
 
 	@Test
-	public void testSingleChildrensStatement() {
+	void testSingleChildrensStatement() {
 		customer.addRental(new Rental(new Movie("The Tigger Movie", Movie.CHILDRENS), 3));
 		assertEquals("Rental Record for Fred\n" +
 					 "\tThe Tigger Movie\t1.5\n" +
@@ -49,7 +49,7 @@ public class VideoStoreTest {
 	}
 
 	@Test
-	public void testMultipleRegularStatement() {
+	void testMultipleRegularStatement() {
 		customer.addRental(new Rental(new Movie("Plan 9 from Outer Space", Movie.REGULAR), 1));
 		customer.addRental(new Rental(new Movie("8 1/2", Movie.REGULAR), 2));
 		customer.addRental(new Rental(new Movie("Eraserhead", Movie.REGULAR), 3));
