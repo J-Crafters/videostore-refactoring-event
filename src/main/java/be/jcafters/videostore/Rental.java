@@ -1,3 +1,4 @@
+package be.jcafters.videostore;
 
 public class Rental {
 

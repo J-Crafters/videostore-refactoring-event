@@ -1,3 +1,5 @@
+package be.jcafters.videostore;
+
 import java.util.Enumeration;
 import java.util.Vector;
 

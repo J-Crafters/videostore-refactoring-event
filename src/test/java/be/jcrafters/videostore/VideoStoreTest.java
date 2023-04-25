@@ -1,4 +1,10 @@
+package be.jcrafters.videostore;
+
 import junit.framework.TestCase;
+
+import be.jcafters.videostore.Customer;
+import be.jcafters.videostore.Movie;
+import be.jcafters.videostore.Rental;
 
 public class VideoStoreTest extends TestCase {
 

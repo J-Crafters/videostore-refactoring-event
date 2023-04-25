@@ -1,4 +1,4 @@
-
+package be.jcafters.videostore;
 
 public class Movie {
 
