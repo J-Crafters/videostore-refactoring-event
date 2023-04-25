@@ -4,15 +4,15 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer {
+public class Statement {
 
-	private String name;
+	private String customerName;
 	private List<Rental> rentals = new ArrayList<>();
 	private double totalAmount;
 	private int frequentRenterPoints;
 
-	public Customer(String name) {
-		this.name = name;
+	public Statement(String customerName) {
+		this.customerName = customerName;
 	}
 
 	public void addRental(Rental rental) {
@@ -27,15 +27,15 @@ public class Customer {
 		return frequentRenterPoints;
 	}
 
-	public String getName() {
-		return name;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public String statement() {
+	public String generate() {
 		totalAmount = 0;
 		frequentRenterPoints = 0;
 
-		StringBuilder result = new StringBuilder("Rental Record for " + getName() + "\n");
+		StringBuilder result = new StringBuilder("Rental Record for " + getCustomerName() + "\n");
 
 		for (Rental rental : rentals) {
 			double thisAmount = 0;

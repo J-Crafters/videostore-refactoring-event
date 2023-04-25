@@ -5,9 +5,9 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.jcafters.videostore.Customer;
 import be.jcafters.videostore.Movie;
 import be.jcafters.videostore.Rental;
+import be.jcafters.videostore.Statement;
 
 import static be.jcafters.videostore.Movie.CHILDRENS;
 import static be.jcafters.videostore.Movie.NEW_RELEASE;
@@ -16,65 +16,77 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class VideoStoreTest {
 
-	private Customer customer;
+	private Statement statement;
+	private Movie newReleaseMovie1;
+	private Movie newReleaseMovie2;
+	private Movie childrensMovie;
+	private Movie regularMovie1;
+	private Movie regularMovie2;
+	private Movie regularMovie3;
 
 	@BeforeEach
 	void setUp() {
-		customer = new Customer("Fred");
+		statement = new Statement("Fred");
+		newReleaseMovie1 = new Movie("The Cell", NEW_RELEASE);
+		newReleaseMovie2 = new Movie("The Tigger Movie", NEW_RELEASE);
+		childrensMovie = new Movie("The Tigger Movie", CHILDRENS);
+		regularMovie1 = new Movie("Plan 9 from Outer Space", REGULAR);
+		regularMovie2 = new Movie("8 1/2", REGULAR);
+		regularMovie3 = new Movie("Eraserhead", REGULAR);
 	}
 
 	@Test
 	void testSingleNewReleaseStatement() {
-		customer.addRental(new Rental(new Movie("The Cell", NEW_RELEASE), 3));
+		statement.addRental(new Rental(newReleaseMovie1, 3));
 
-		customer.statement();
+		statement.generate();
 
-		assertThat(customer.getTotalAmount()).isEqualTo(BigDecimal.valueOf(9.0));
-		assertThat(customer.getFrequentRenterPoints()).isEqualTo(2);
+		assertThat(statement.getTotalAmount()).isEqualTo(BigDecimal.valueOf(9.0));
+		assertThat(statement.getFrequentRenterPoints()).isEqualTo(2);
 	}
 
 	@Test
 	void testDualNewReleaseStatement() {
-		customer.addRental(new Rental(new Movie("The Cell", NEW_RELEASE), 3));
-		customer.addRental(new Rental(new Movie("The Tigger Movie", NEW_RELEASE), 3));
+		statement.addRental(new Rental(newReleaseMovie1, 3));
+		statement.addRental(new Rental(newReleaseMovie2, 3));
 
-		customer.statement();
+		statement.generate();
 
-		assertThat(customer.getTotalAmount()).isEqualTo(BigDecimal.valueOf(18.0));
-		assertThat(customer.getFrequentRenterPoints()).isEqualTo(4);
+		assertThat(statement.getTotalAmount()).isEqualTo(BigDecimal.valueOf(18.0));
+		assertThat(statement.getFrequentRenterPoints()).isEqualTo(4);
 	}
 
 	@Test
 	void testSingleChildrensStatement() {
-		customer.addRental(new Rental(new Movie("The Tigger Movie", CHILDRENS), 3));
+		statement.addRental(new Rental(childrensMovie, 3));
 
-		customer.statement();
+		statement.generate();
 
-		assertThat(customer.getTotalAmount()).isEqualTo(BigDecimal.valueOf(1.5));
-		assertThat(customer.getFrequentRenterPoints()).isEqualTo(1);
+		assertThat(statement.getTotalAmount()).isEqualTo(BigDecimal.valueOf(1.5));
+		assertThat(statement.getFrequentRenterPoints()).isEqualTo(1);
 	}
 
 	@Test
 	void testMultipleRegularStatement() {
-		customer.addRental(new Rental(new Movie("Plan 9 from Outer Space", REGULAR), 1));
-		customer.addRental(new Rental(new Movie("8 1/2", REGULAR), 2));
-		customer.addRental(new Rental(new Movie("Eraserhead", REGULAR), 3));
+		statement.addRental(new Rental(regularMovie1, 1));
+		statement.addRental(new Rental(regularMovie2, 2));
+		statement.addRental(new Rental(regularMovie3, 3));
 
-		customer.statement();
+		statement.generate();
 
-		assertThat(customer.getTotalAmount()).isEqualTo(BigDecimal.valueOf(7.5));
-		assertThat(customer.getFrequentRenterPoints()).isEqualTo(3);
+		assertThat(statement.getTotalAmount()).isEqualTo(BigDecimal.valueOf(7.5));
+		assertThat(statement.getFrequentRenterPoints()).isEqualTo(3);
 	}
 
 	@Test
 	void testMultipleRegularStatementsFormat() {
-		customer.addRental(new Rental(new Movie("Plan 9 from Outer Space", REGULAR), 1));
-		customer.addRental(new Rental(new Movie("8 1/2", REGULAR), 2));
-		customer.addRental(new Rental(new Movie("Eraserhead", REGULAR), 3));
+		statement.addRental(new Rental(regularMovie1, 1));
+		statement.addRental(new Rental(regularMovie2, 2));
+		statement.addRental(new Rental(regularMovie3, 3));
 
-		customer.statement();
+		statement.generate();
 
-		assertThat(customer.statement()).isEqualTo("Rental Record for Fred\n" +
+		assertThat(statement.generate()).isEqualTo("Rental Record for Fred\n" +
 												   "\tPlan 9 from Outer Space\t2.0\n" +
 												   "\t8 1/2\t2.0\n" +
 												   "\tEraserhead\t3.5\n" +
