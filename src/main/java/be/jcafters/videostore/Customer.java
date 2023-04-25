@@ -1,5 +1,6 @@
 package be.jcafters.videostore;
 
+import java.math.BigDecimal;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -7,6 +8,8 @@ public class Customer {
 
 	private String name;
 	private Vector rentals = new Vector();
+	private double totalAmount;
+	private int frequentRenterPoints;
 
 	public Customer(String name) {
 		this.name = name;
@@ -16,13 +19,21 @@ public class Customer {
 		rentals.addElement(rental);
 	}
 
+	public BigDecimal getTotalAmount() {
+		return BigDecimal.valueOf(totalAmount);
+	}
+
+	public int getFrequentRenterPoints() {
+		return frequentRenterPoints;
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public String statement() {
-		double totalAmount = 0;
-		int frequentRenterPoints = 0;
+		totalAmount = 0;
+		frequentRenterPoints = 0;
 		Enumeration rentals = this.rentals.elements();
 		String result = "Rental Record for " + getName() + "\n";
 
