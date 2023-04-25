@@ -1,0 +1,44 @@
+<profile version="1.0">
+	<option name="myName" value="Custom Inspections"/>
+	<inspection_tool class="FieldCanBeLocal" enabled="false" level="WARNING" enabled_by_default="false"/>
+	<inspection_tool class="FieldMayBeFinal" enabled="false" level="WARNING" enabled_by_default="false"/>
+	<inspection_tool class="GrazieInspection" enabled="false" level="TYPO" enabled_by_default="false"/>
+	<inspection_tool class="NewClassNamingConvention" enabled="false" level="WARNING" enabled_by_default="false"/>
+	<inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true">
+		<replaceConfiguration name="Refactor to assertJ" uuid="7476a608-9ec3-3edf-9866-ae141b1bbec2" problemDescriptor="Because assertJ is just better." text="org.junit.jupiter.api.Assertions.assertEquals($expected$, $actual$);" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="Assertions.assertThat($actual$).isEqualTo($expected$);">
+			<constraint name="__context__" within="" contains=""/>
+			<constraint name="expected" within="" contains=""/>
+			<constraint name="actual" within="" contains=""/>
+		</replaceConfiguration>
+		<replaceConfiguration name="Refactor to assertJ" uuid="7476a608-9ec3-3edf-9866-ae141b1bbec2" text="org.junit.jupiter.api.Assertions.assertEquals($expected$, $actual$);" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="false" shortenFQN="true" useStaticImport="true" replacement="org.assertj.core.api.Assertions.assertThat($actual$).isEqualTo($expected$);">
+			<constraint name="__context__" within="" contains=""/>
+			<constraint name="expected" within="" contains=""/>
+			<constraint name="actual" within="" contains=""/>
+			<variableDefinition name="actual"/>
+		</replaceConfiguration>
+		<replaceConfiguration name="Refactor to assertJ" uuid="7476a608-9ec3-3edf-9866-ae141b1bbec2" text="org.junit.jupiter.api.Assertions.assertFalse($expression$);&#10;" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="Assertions.assertThat($expression$).isFalse();">
+			<constraint name="__context__" within="" contains=""/>
+			<constraint name="expression" within="" contains=""/>
+		</replaceConfiguration>
+		<replaceConfiguration name="Refactor to assertJ" uuid="7476a608-9ec3-3edf-9866-ae141b1bbec2" text="org.junit.jupiter.api.Assertions.assertNotNull($expression$);&#10;" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="Assertions.assertThat($expression$).isNotNull();">
+			<constraint name="__context__" within="" contains=""/>
+			<constraint name="expression" within="" contains=""/>
+		</replaceConfiguration>
+		<replaceConfiguration name="Refactor to assertJ" uuid="7476a608-9ec3-3edf-9866-ae141b1bbec2" text="org.junit.jupiter.api.Assertions.assertThat($expression$, org.hamcrest.Matchers.hasSize($size$));&#10;" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="Assertions.assertThat($expression$).hasSize($size$);">
+			<constraint name="__context__" within="" contains=""/>
+			<constraint name="expression" within="" contains=""/>
+			<constraint name="size" within="" contains=""/>
+		</replaceConfiguration>
+		<replaceConfiguration name="Refactor to assertJ" uuid="7476a608-9ec3-3edf-9866-ae141b1bbec2" text="assertThat($collection$.isEmpty()).isFalse();" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="assertThat($collection$).isNotEmpty();">
+			<constraint name="__context__" within="" contains=""/>
+			<constraint name="collection" within="" contains=""/>
+		</replaceConfiguration>
+		<replaceConfiguration name="Refactor to assertJ" uuid="7476a608-9ec3-3edf-9866-ae141b1bbec2" text="assertThat($collection$.size()).isEqualTo($size$);" recursive="false" caseInsensitive="false" type="JAVA" pattern_context="default" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="assertThat($collection$).hasSize($size$);">
+			<constraint name="__context__" within="" contains=""/>
+			<constraint name="collection" within="" contains=""/>
+			<constraint name="size" within="" contains=""/>
+		</replaceConfiguration>
+	</inspection_tool>
+	<inspection_tool class="SpringJavaAutowiredFieldsWarningInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false"/>
+	<inspection_tool class="SqlResolveInspection" enabled="true" level="INFORMATION" enabled_by_default="true"/>
+</profile>
