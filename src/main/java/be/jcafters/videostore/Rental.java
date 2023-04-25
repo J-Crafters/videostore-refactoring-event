@@ -17,4 +17,8 @@ public class Rental {
 	public Movie getMovie() {
 		return movie;
 	}
+
+	public String getTitle() {
+		return movie.getTitle();
+	}
 }

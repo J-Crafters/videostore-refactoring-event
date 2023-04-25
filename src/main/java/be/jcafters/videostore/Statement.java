@@ -59,28 +59,15 @@ public class Statement {
 	}
 
 	private String rentalLine(Rental rental) {
-		StringBuilder rentalLines = new StringBuilder();
-
 		double rentalAmount = determineAmount(rental);
-
 		frequentRenterPoints += determineFrequentRenterPoints(rental);
-
-		rentalLines.append("\t").append(rental.getMovie().getTitle()).append("\t").append(rentalAmount).append("\n");
-
 		totalAmount += rentalAmount;
 
-		return rentalLines.toString();
+		return formatRentalLine(rental, rentalAmount);
 	}
 
-	private int determineFrequentRenterPoints(Rental rental) {
-		int frequentRenterPoints = 0;
-		frequentRenterPoints++;
-
-		if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE && rental.getDaysRented() > 1) {
-			frequentRenterPoints++;
-		}
-
-		return frequentRenterPoints;
+	private String formatRentalLine(Rental rental, double rentalAmount) {
+		return String.format("\t%s\t%.1f\n", rental.getTitle(), rentalAmount);
 	}
 
 	private double determineAmount(Rental rental) {
@@ -103,6 +90,17 @@ public class Statement {
 		default -> throw new IllegalArgumentException();
 		}
 		return rentalAmount;
+	}
+
+	private int determineFrequentRenterPoints(Rental rental) {
+		if (bonusPointsEarned(rental)) {
+			return 2;
+		}
+		return 1;
+	}
+
+	private boolean bonusPointsEarned(Rental rental) {
+		return rental.getMovie().getPriceCode() == Movie.NEW_RELEASE && rental.getDaysRented() > 1;
 	}
 
 	private String footer() {
