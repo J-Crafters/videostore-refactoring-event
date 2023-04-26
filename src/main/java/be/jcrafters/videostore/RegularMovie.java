@@ -9,13 +9,10 @@ public class RegularMovie extends Movie {
 
 	@Override
 	public double determineAmount(int daysRented) {
-		double rentalAmount = 0;
-
-		rentalAmount += 2;
+		double rentalAmount = 2;
 		if (daysRented > 2) {
 			rentalAmount += (daysRented - 2) * 1.5;
 		}
-
 		return rentalAmount;
 	}
 

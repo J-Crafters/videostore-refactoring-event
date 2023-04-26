@@ -9,9 +9,8 @@ public class ChildrensMovie extends Movie {
 
 	@Override
 	public double determineAmount(int daysRented) {
-		double rentalAmount = 0;
+		double rentalAmount = 1.5;
 
-		rentalAmount += 1.5;
 		if (daysRented > 3) {
 			rentalAmount += (daysRented - 3) * 1.5;
 		}

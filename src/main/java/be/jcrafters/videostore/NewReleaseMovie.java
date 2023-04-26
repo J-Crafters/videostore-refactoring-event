@@ -10,9 +10,7 @@ public class NewReleaseMovie extends Movie {
 
 	@Override
 	public double determineAmount(int daysRented) {
-		double rentalAmount = 0;
-		rentalAmount += daysRented * 3;
-		return rentalAmount;
+		return daysRented * 3;
 	}
 
 	@Override
