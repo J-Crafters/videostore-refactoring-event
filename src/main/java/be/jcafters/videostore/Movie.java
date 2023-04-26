@@ -26,4 +26,30 @@ public class Movie {
 		return title;
 	}
 
+	double determineAmount(int daysRented) {
+		return switch (getPriceCode()) {
+			case REGULAR -> {
+				double rentalAmount = 0;
+				rentalAmount += 2;
+				if (daysRented > 2) {
+					rentalAmount += (daysRented - 2) * 1.5;
+				}
+				yield rentalAmount;
+			}
+			case NEW_RELEASE -> {
+				double rentalAmount = 0;
+				rentalAmount += daysRented * 3;
+				yield rentalAmount;
+			}
+			case CHILDRENS -> {
+				double rentalAmount = 0;
+				rentalAmount += 1.5;
+				if (daysRented > 3) {
+					rentalAmount += (daysRented - 3) * 1.5;
+				}
+				yield rentalAmount;
+			}
+			default -> throw new IllegalArgumentException();
+		};
+	}
 }
