@@ -20,11 +20,6 @@ public class ChildrensMovie extends Movie {
 
 	@Override
 	public int determineFrequentRenterPoints(int daysRented) {
-		boolean bonusIsEarned = getPriceCode() == NEW_RELEASE && daysRented > 1;
-
-		if (bonusIsEarned) {
-			return 2;
-		}
 		return 1;
 	}
 }

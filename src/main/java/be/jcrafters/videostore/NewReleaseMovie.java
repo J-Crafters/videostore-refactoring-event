@@ -10,16 +10,11 @@ public class NewReleaseMovie extends Movie {
 
 	@Override
 	public double determineAmount(int daysRented) {
-		return daysRented * 3;
+		return daysRented * 3.0;
 	}
 
 	@Override
 	public int determineFrequentRenterPoints(int daysRented) {
-		boolean bonusIsEarned = getPriceCode() == NEW_RELEASE && daysRented > 1;
-
-		if (bonusIsEarned) {
-			return 2;
-		}
-		return 1;
+		return daysRented > 1 ? 2 : 1;
 	}
 }
