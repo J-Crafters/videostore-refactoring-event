@@ -9,9 +9,6 @@ import be.jcafters.videostore.Movie;
 import be.jcafters.videostore.Rental;
 import be.jcafters.videostore.Statement;
 
-import static be.jcafters.videostore.Movie.CHILDRENS;
-import static be.jcafters.videostore.Movie.NEW_RELEASE;
-import static be.jcafters.videostore.Movie.REGULAR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class VideoStoreTest {
@@ -27,12 +24,12 @@ class VideoStoreTest {
 	@BeforeEach
 	void setUp() {
 		statement = new Statement("Fred");
-		newReleaseMovie1 = new Movie("The Cell", NEW_RELEASE);
-		newReleaseMovie2 = new Movie("The Tigger Movie", NEW_RELEASE);
-		childrensMovie = new Movie("The Tigger Movie", CHILDRENS);
-		regularMovie1 = new Movie("Plan 9 from Outer Space", REGULAR);
-		regularMovie2 = new Movie("8 1/2", REGULAR);
-		regularMovie3 = new Movie("Eraserhead", REGULAR);
+		newReleaseMovie1 = new NewReleaseMovie("The Cell");
+		newReleaseMovie2 = new NewReleaseMovie("The Tigger Movie");
+		childrensMovie = new ChildrensMovie("The Tigger Movie");
+		regularMovie1 = new RegularMovie("Plan 9 from Outer Space");
+		regularMovie2 = new RegularMovie("8 1/2");
+		regularMovie3 = new RegularMovie("Eraserhead");
 	}
 
 	@Test
