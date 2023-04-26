@@ -83,12 +83,14 @@ class VideoStoreTest {
 
 		statement.generate();
 
-		assertThat(statement.generate()).isEqualTo("Rental Record for Fred\n" +
-												   "\tPlan 9 from Outer Space\t2.0\n" +
-												   "\t8 1/2\t2.0\n" +
-												   "\tEraserhead\t3.5\n" +
-												   "You owed 7.5\n" +
-												   "You earned 3 frequent renter points\n" +
-												   "");
+		assertThat(statement.generate()).isEqualTo(
+				"""
+						Rental Record for Fred
+						\tPlan 9 from Outer Space\t2.0
+						\t8 1/2\t2.0
+						\tEraserhead\t3.5
+						You owed 7.5
+						You earned 3 frequent renter points
+						""");
 	}
 }
