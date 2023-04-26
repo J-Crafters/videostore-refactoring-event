@@ -3,8 +3,9 @@ package be.jcrafters.videostore;
 import be.jcafters.videostore.Movie;
 
 public class RegularMovie extends Movie {
+
 	public RegularMovie(String title) {
-		super(title, REGULAR);
+		super(title);
 	}
 
 	@Override

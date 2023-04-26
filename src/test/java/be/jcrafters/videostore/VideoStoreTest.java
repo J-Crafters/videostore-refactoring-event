@@ -64,6 +64,16 @@ class VideoStoreTest {
 	}
 
 	@Test
+	void testSingleChildrensStatementMoreThanThreeDaysRented() {
+		statement.addRental(new Rental(childrensMovie, 4));
+
+		statement.generate();
+
+		assertThat(statement.getTotalAmount()).isEqualTo(BigDecimal.valueOf(3.0));
+		assertThat(statement.getFrequentRenterPoints()).isEqualTo(1);
+	}
+
+	@Test
 	void testMultipleRegularStatement() {
 		statement.addRental(new Rental(regularMovie1, 1));
 		statement.addRental(new Rental(regularMovie2, 2));
