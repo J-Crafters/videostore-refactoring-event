@@ -27,13 +27,7 @@ public class Rental {
 	}
 
 	int determineFrequentRenterPoints() {
-		if (bonusPointsEarned()) {
-			return 2;
-		}
-		return 1;
+		return movie.determineFrequentRenterPoints(daysRented);
 	}
 
-	private boolean bonusPointsEarned() {
-		return getMovie().getPriceCode() == Movie.NEW_RELEASE && daysRented > 1;
-	}
 }
